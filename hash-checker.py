@@ -3,13 +3,20 @@ import os
 
 
 def calculate_hash(file_path, algorithm):
-    hash_func = hashlib.new(algorithm)
+    try:
+        hash_func = hashlib.new(algorithm)
 
-    with open(file_path, "rb") as file:
-        while chunk := file.read(4096):
-            hash_func.update(chunk)
+        with open(file_path, "rb") as file:
+            while chunk := file.read(4096):
+                hash_func.update(chunk)
 
-    return hash_func.hexdigest()
+        return hash_func.hexdigest()
+
+    except PermissionError:
+        return "Permission denied"
+
+    except Exception as e:
+        return f"Error: {e}"
 
 
 def main():
