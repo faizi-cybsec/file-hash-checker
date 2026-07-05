@@ -18,8 +18,12 @@ def main():
     file_path = input("Enter file path: ")
 
     if not os.path.exists(file_path):
-        print("\n[-] File not found!")
-        return
+    print("\n[-] File not found!")
+    return
+
+if os.path.isdir(file_path):
+    print("\n[-] Error: Please provide a file path, not a directory.")
+    return
 
     print("\nCalculating hashes...\n")
 
